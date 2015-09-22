@@ -10,15 +10,16 @@ int equal_string(void * a, void * b) {
 	else {return 0;}
 }
 
-void do_nothing(void * a) {
+// useful for non-heap allocated data
+void destroy_nop(void * a) {
 	return;
 }
 
 int main() {
 	HashTable * h_table = hashtable_new_default(
 		equal_string, 
-		do_nothing, 
-		do_nothing
+		destroy_nop, 
+		destroy_nop
 	);
 
 	hashtable_put(h_table, "abc", 4, "def", 4);
