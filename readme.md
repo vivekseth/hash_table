@@ -4,7 +4,7 @@
 
 This is a thread-safe, generic hashtable implementation in C. 
 
-See `test.c` for usage. 
+See `./sources/test.c` for usage. 
 
 ## Features
 
