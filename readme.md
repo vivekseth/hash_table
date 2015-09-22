@@ -17,4 +17,4 @@ See `test.c` for usage.
 
 1. Use `make hash_table.a` to compile project to library
 2. Add `./include/` to your header search path
-3. When compiling project ling against `./hash_table.a`
+3. When compiling project link against `./hash_table.a`
