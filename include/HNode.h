@@ -1,22 +1,22 @@
-#ifndef H_NODE
-#define H_NODE
+#ifndef __HNode
+#define __HNode
 
 #include <stdlib.h>
 
 typedef void (* DeleteData)(void *);
 
-typedef struct H_Node {
+typedef struct HNode_ {
 	void * key;
 	size_t key_len;
 	void * value;
 	size_t value_len;
 	DeleteData deleteKey;
 	DeleteData deleteValue;
-	struct H_Node * next;
-} H_Node;
+	struct HNode_ * next;
+} HNode;
 
-// returns pointer to h_Node on success. 0 on failure
-H_Node * new_H_Node(
+// returns pointer to HNode on success. 0 on failure
+HNode * hnode_new(
 	void * key,
 	size_t key_len,
 	void * value, 
@@ -25,7 +25,7 @@ H_Node * new_H_Node(
 	DeleteData deleteValue
 );
 
-void deleteList_H_Node(H_Node * node);
-void deleteSingle_H_Node(H_Node * node);
+void hnode_delete_list(HNode * node);
+void hnode_delete_single(HNode * node);
 
 #endif

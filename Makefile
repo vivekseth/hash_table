@@ -22,7 +22,7 @@ hash_table.a
 
 OBJECT_FILES = \
 HashTable.o \
-H_Node.o 
+HNode.o 
 
 # Convenience Rules
 all: target

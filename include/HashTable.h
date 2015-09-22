@@ -1,7 +1,7 @@
 #ifndef HASH_TABLE
 #define HASH_TABLE
 
-#include <H_Node.h>
+#include <HNode.h>
 #include <stdlib.h>
 #include <stdint.h>
 #include <pthread.h>
@@ -11,7 +11,7 @@ typedef int (* EqualityFunc)(void *, void *);
 typedef void (* IteratorCallback)(void *, size_t, void *, size_t);
 
 typedef struct HashTable {
-	H_Node ** table;
+	HNode ** table;
 	int size;
 	int count;
 	double max_load;
@@ -23,7 +23,7 @@ typedef struct HashTable {
 	pthread_mutex_t * ht_mutex;
 } HashTable;
 
-HashTable * new_HashTable(
+HashTable * hashtable_new(
 	int init_size,
 	double max_load,
 	double resize_factor,
@@ -33,19 +33,19 @@ HashTable * new_HashTable(
 	DeleteData deleteValue
 );
 
-HashTable * new_HashTable_default(
+HashTable * hashtable_new_default(
 	EqualityFunc equal,
 	DeleteData deleteKey,
 	DeleteData deleteValue
 );
-void delete_HashTable(HashTable * h_table);
+void hashtable_delete(HashTable * h_table);
 
-void iterate_HashTable(HashTable * h_table, IteratorCallback callback);
-void put_HT(HashTable * h_table, void * key, size_t key_len, void * value, size_t value_len);
-void * get_HT(HashTable * h_table, void * key, size_t key_len);
-void remove_HT(HashTable * h_table, void * key, size_t key_len);
-int keyExists_HT(HashTable * h_table, void * key, size_t key_len);
-void print_HashTable(HashTable * h_table);
+void hashtable_iterate(HashTable * h_table, IteratorCallback callback);
+void hashtable_put(HashTable * h_table, void * key, size_t key_len, void * value, size_t value_len);
+void * hashtable_get(HashTable * h_table, void * key, size_t key_len);
+void hashtable_remove(HashTable * h_table, void * key, size_t key_len);
+int hashtable_key_exists(HashTable * h_table, void * key, size_t key_len);
+void hashtable_print(HashTable * h_table);
 
 
 #endif

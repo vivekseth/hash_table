@@ -1,8 +1,8 @@
-#include <H_Node.h>
+#include <HNode.h>
 #include <stdio.h>
 
-// returns pointer to h_Node on success. 0 on failure
-H_Node * new_H_Node(
+// returns pointer to HNode on success. 0 on failure
+HNode * hnode_new(
 	void * key,
 	size_t key_len,
 	void * value, 
@@ -10,7 +10,7 @@ H_Node * new_H_Node(
 	DeleteData deleteKey, 
 	DeleteData deleteValue
 ) {
-	H_Node * hn = malloc(sizeof(H_Node));
+	HNode * hn = malloc(sizeof(HNode));
 	if (hn != 0) {
 		hn->key = key;
 		hn->key_len = key_len;
@@ -25,15 +25,15 @@ H_Node * new_H_Node(
 
 //  returns 1 on success, 0 on failure
 //  deletes nodes in list
-void deleteList_H_Node(H_Node * node) {
-	H_Node * curr = node;
+void hnode_delete_list(HNode * node) {
+	HNode * curr = node;
 	while (curr) {
-		H_Node * prev = curr;
+		HNode * prev = curr;
 		curr = curr->next;		
-		deleteSingle_H_Node(prev);
+		hnode_delete_single(prev);
 	}
 }
-void deleteSingle_H_Node(H_Node * node) {	
+void hnode_delete_single(HNode * node) {	
 	node->deleteKey(node->key);
 	node->deleteValue(node->value);
 	node->key = 0;
