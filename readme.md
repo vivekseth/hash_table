@@ -1,14 +1,20 @@
 # Read Me
 
-# Description
+## Description
 
-This is a threadsafe, generic hashtable implementation in C. 
+This is a thread-safe, generic hashtable implementation in C. 
 
 See `test.c` for usage. 
 
-To integrate into project simply copy files and build using your makefile or use this project's makefile to compile to library and just include the `./include/` folder into your project's header search path. 
-
 ## Features
 
-- Custom key and value types. 
-- 
+- Custom key and value types
+- Thread-safe
+- Simple, consistent API
+- Compiles to .a library for use in other project
+
+## Integratation
+
+1. Use `make hash_table.a` to compile project to library
+2. Add `./include/` to your header search path
+3. When compiling project ling against `./hash_table.a`
