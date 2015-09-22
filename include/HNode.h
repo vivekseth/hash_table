@@ -5,6 +5,7 @@
 
 typedef void (* DeleteData)(void *);
 
+// This struct and the functions declared in this file are not to be used by clients of HashTable. 
 typedef struct HNode_ {
 	void * key;
 	size_t key_len;
