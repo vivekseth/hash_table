@@ -1,20 +1,36 @@
-# Read Me
+# hash\_table
 
 ## Description
 
 This is a thread-safe, generic hashtable implementation in C. 
 
-See `./sources/test.c` for usage. 
+See `source/test.c` for usage.
 
 ## Features
 
 - Custom key and value types
 - Thread-safe
 - Simple, consistent API
-- Compiles to .a library for use in other project
+- Compiles to .a library for use in other projects
 
-## Integratation
+## Compiling
 
-1. Use `make hash_table.a` to compile project to library
-2. Add `./include/` to your header search path
-3. When compiling project link against `./hash_table.a`
+1. Use `make` to create the static library. (`libhashtable.a`)
+2. Use `sudo make install` to install the library and header files to PREFIX.
+3. Use the clean rule to remove the new files: `make clean`.
+
+## Usage
+
+You can get the headers from the `hashtable` folder like this:
+
+```C
+#include <hashtable/HashTable.h>
+#include <hashtable/HNode.h>
+```
+
+When compiling your files, add the library to your flags: `-lhashtable`.
+
+## Uninstalling
+
+Use the makefile's uninstall rule: `sudo make uninstall`. It'll remove the
+files from PREFIX.
