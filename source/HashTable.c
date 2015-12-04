@@ -3,9 +3,9 @@
 
 // private interface
 
-void _hashtable_resize(HashTable * h_table);
-uint32_t _hashtable_hash_adler32(const void *buf, size_t buflength);
-int _hashtable_replace(
+static void _hashtable_resize(HashTable * h_table);
+static uint32_t _hashtable_hash_adler32(const void *buf, size_t buflength);
+static int _hashtable_replace(
 	HashTable * h_table, 
 	void * key, size_t key_len, 
 	void * value, size_t value_len
@@ -127,7 +127,7 @@ void * hashtable_get(HashTable * h_table, void * key, size_t key_len) {
 	return ret_val;
 }
 
-int _hashtable_replace(
+static int _hashtable_replace(
 	HashTable * h_table, 
 	void * key, size_t key_len, 
 	void * value, size_t value_len
@@ -182,7 +182,7 @@ void hashtable_remove(HashTable * h_table, void * key, size_t key_len) {
 	pthread_mutex_unlock(ht_mutex);
 }
 
-void _hashtable_resize(HashTable * h_table) {
+static void _hashtable_resize(HashTable * h_table) {
 	int size = h_table->size;
 	int new_size = (int)(h_table->size * h_table->resize_factor);
 	HNode ** new_table = calloc(sizeof(HNode *), new_size);
@@ -248,7 +248,7 @@ http://stackoverflow.com/a/14409947/3158248
 
 Please note, that the rest of the code is my own.
 */
-uint32_t _hashtable_hash_adler32(const void *buf, size_t buflength) {
+static uint32_t _hashtable_hash_adler32(const void *buf, size_t buflength) {
      const uint8_t *buffer = (const uint8_t*)buf;
 
      uint32_t s1 = 1;
