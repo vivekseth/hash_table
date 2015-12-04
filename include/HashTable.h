@@ -2,9 +2,6 @@
 #define __HASH_TABLE
 
 #include <HNode.h>
-#include <stdlib.h>
-#include <stdint.h>
-#include <pthread.h>
 
 typedef uint32_t (* HashFunc)(const void *, size_t);
 typedef int (* EqualityFunc)(void *, void *);
