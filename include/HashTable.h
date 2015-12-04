@@ -1,6 +1,9 @@
 #ifndef __HASH_TABLE
 #define __HASH_TABLE
 
+#include <stdint.h>
+#include <pthread.h>
+
 #include <HNode.h>
 
 typedef uint32_t (* HashFunc)(const void *, size_t);
