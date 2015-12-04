@@ -1,6 +1,7 @@
 #include <string.h>
 #include <stdio.h>
-#include <HashTable.h>
+
+#include <hashtable/HashTable.h>
 
 int equal_string(void * a, void * b) {
 	char * str1 = (char *) a;
