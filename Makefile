@@ -5,44 +5,42 @@
 #	$(X)	expansion of variable X
 # 	make -C lets you specify a directory to call `make` in
 
-# Variables
-COMPILER = gcc
-GCC_FLAGS = -g -Wall
-ARCHIVE = ar
-AR_FLAGS = rvs
+.DEFAULT_GOAL := libhashtable.a
+PREFIX = /usr/local
 
-INCLUDE_PATHS = \
--I ./include/ \
+CC 		= gcc
+CFLAGS 	= -g -Wall -Iinclude
+ARFLAGS	= rvs
 
-EXECUTABLES = \
-test
+override CFLAGS += -Iinclude
 
-LIBRARY_PATHS = \
-hash_table.a
+OBJ = HashTable.o HNode.o 
+BIN = test
 
-OBJECT_FILES = \
-HashTable.o \
-HNode.o 
-
-# Convenience Rules
-all: target
-target: test
+.PHONY: all clean install uninstall
+all: $(.DEFAULT_GOAL) install $(BIN)
 
 # Object Compilation
-%.o: ./source/%.c ./include/%.h
-	$(COMPILER) $(INCLUDE_PATHS) $(GCC_FLAGS) -c $< -o $@	
+%.o: source/%.c include/%.h
+	$(CC) $(CFLAGS) -c $< -o $@	
 
 # Executables
-test: test.o $(OBJECT_FILES)
-	$(COMPILER) $(INCLUDE_PATHS) $(GCC_FLAGS) $^ -o $@
+test: source/test.c
+	$(CC) $(CFLAGS) $< -o $@ -lhashtable
 
 # Library
-hash_table.a: $(OBJECT_FILES)
-	$(ARCHIVE) $(AR_FLAGS) $@ $^
+libhashtable.a: $(OBJ)
+	$(AR) $(ARFLAGS) $@ $^
 
-# Clean
+install:
+	install -d $(PREFIX)/lib $(PREFIX)/include/hashtable
+	install -m 0644 libhashtable.a $(PREFIX)/lib
+	install -m 0644 include/*.h $(PREFIX)/include/hashtable
+
+uninstall:
+	rm -f $(PREFIX)/lib/libhashtable.a
+	rm -rf $(PREFIX)/include/hashtable
+
 clean:
-	rm -rf test.o
-	rm -rf $(EXECUTABLES)
-	rm -rf $(LIBRARY_PATHS)
-	rm -rf $(OBJECT_FILES)
+	rm -f libhashtable.a
+	rm -rf $(BIN) $(OBJ)
